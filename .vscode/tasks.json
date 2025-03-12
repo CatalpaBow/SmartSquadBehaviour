@@ -1,0 +1,44 @@
+{
+    "version":"2.0.0",
+    "tasks":[
+        {
+            "label":"update_prep",
+            "type":"shell",
+            "command":"python tools/update_prep.py"
+        },        
+        {
+            "label":"hemtt dev",
+            "type":"shell",
+            "command":"hemtt dev",
+            "presentation": {
+                "close": true
+            }
+        },        
+        {
+            "label":"hemtt launch",
+            "type":"shell",
+            "command":"hemtt launch",
+            "presentation": {
+                "close": true
+            }
+        },
+        { 
+            "label":"dev build",
+            "type":"shell",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "update_prep",
+                "hemtt dev"
+            ]
+        },
+        { 
+            "label":"test launch",
+            "type":"shell",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "update_prep",
+                "hemtt launch"
+            ]
+        }
+    ]
+}

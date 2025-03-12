@@ -1,0 +1,1 @@
+#include "\replacement_MAINPREFIX\replacement_PREFIX\addons\blank\script_component.hpp"
