@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="SSB">
+    <Package name="Entry">
+        <Key ID="STR_SSB_Entry_DisplayName">
+            <English>Entry</English>
+            <Russian>Пусто</Russian>
+            <German>Leer</German>
+            <Czech>Prázdný</Czech>
+            <Italian>vuoto</Italian>
+            <Korean>공백</Korean>
+            <Japanese>ブランク</Japanese>
+        </Key>
+    </Package>
+</Project>

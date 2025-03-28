@@ -1,17 +1,18 @@
-name = "Arma Addon Template"
-author = "FooBar Team"
-prefix = "aam"
+name = "Smart Squad Behaviour"
+author = "CatalpaBow"
+prefix = "ssb"
 mainprefix = "z"
 git_hash = 0
 
 [hemtt.launch.default]
 workshop = [
-    "450814997", # CBA_A3's Workshop ID
+    "450814997","2369477168",
 ]
 parameters = [
-    "-skipIntro",           # These parameters are passed to the Arma 3 executable
-    "-noSplash",            # They do not need to be added to your list
-    "-showScriptErrors",    # You can add additional parameters here
+    "-skipIntro",
+    "-noSplash",
+    "-showScriptErrors",
     "-debug",
     "-filePatching",
-]
+] 
+mission = "test.VR"

@@ -1,0 +1,1 @@
+#include "\z\ssb\addons\army\script_component.hpp"

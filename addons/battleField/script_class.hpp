@@ -1,0 +1,7 @@
+#include "\z\ssb\addons\battleField\class\AreaInfo.hpp"
+#include "\z\ssb\addons\battleField\class\BattlePositionList.hpp"
+#include "\z\ssb\addons\battleField\class\BattleZoneList.hpp"
+#include "\z\ssb\addons\battleField\class\IBattleArea.hpp"
+#include "\z\ssb\addons\battleField\class\BattleField.hpp"
+#include "\z\ssb\addons\battleField\class\BattlePosition.hpp"
+#include "\z\ssb\addons\battleField\class\BattleZone.hpp"

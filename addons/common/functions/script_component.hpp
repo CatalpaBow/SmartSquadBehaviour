@@ -1,0 +1,1 @@
+#include "\z\ssb\addons\common\script_component.hpp"
