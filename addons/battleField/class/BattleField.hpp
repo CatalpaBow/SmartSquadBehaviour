@@ -1,12 +1,16 @@
 GCLASS(BattleField) = [
     ["#base",GCLASS(IBattleArea)],
-    ["areaInfo",nil],
-	["battleZones",[]],
+    ["areaIdIssuer",nil],
+	["battleZones",nil],
     ["#str",{"BattleField"}],
 	["#create", {	
-		params ["_areaInfo","_battleZoneList"];
-        _self set ["areaInfo",_areaInfo];
-        _self set ["battleZones",_battleZoneList];
+        params["_pos"];
+        private _idIssuer = createHashMapObject[GCLASS(IDIssuer)];
+        _self set ["id",_idIssuer call ["Issue"]];
+        _self set ["name","BattleField"];
+        _self set ["position",_pos];
+        _self set ["areaIdIssuer",_idIssuer];
+        _self set ["battleZones",[]];
 	}],
     ["FindFebaInside", {
         params["_side"];
@@ -19,6 +23,11 @@ GCLASS(BattleField) = [
         [_ba];
     }],
     ["GetPosition",{
-        _self get "areaInfo" get "position";
+        _self get "position";
+    }],
+    ["NewBattleZone",{
+        params["_battleZoneCreater"];
+        _ba = _battleZoneCreater call ["Create",[_self get "areaIdIssuer"]];
+        _self get "battleZones" pushBack _ba;
     }]
 ];

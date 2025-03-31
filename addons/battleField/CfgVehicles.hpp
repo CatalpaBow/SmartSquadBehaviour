@@ -5,6 +5,17 @@ class CfgVehicles {
         category = "SmartSquadBehaviour";
         displayName = "BattleField";
         function = QFUNC(battleField);
+        class AttributesBase;
+        class Attributes : AttributesBase{
+            class Edit;
+            class Name : Edit{
+                property     = QGVAR(name);
+                displayName  = "Name";
+                tooltip      = "Name of battle field";
+                typeName     = "STRING";    
+                defaultValue = """BattleField""";
+            };
+        };
     };
     class GVAR(battleZone): EGVAR(modules,moduleBase) {
         category = "SmartSquadBehaviour";
@@ -14,6 +25,13 @@ class CfgVehicles {
         class Attributes : AttributesBase{
             class Edit;
             class Combo;
+            class Name : Edit{
+                property     = QGVAR(name);
+                displayName  = "Name";
+                tooltip      = "Name of battle zone";
+                typeName     = "STRING";    
+                defaultValue = """""";
+            };
             class Priority : Edit{
                 property     = QGVAR(Priority);
                 displayName  = "Priority";
@@ -24,7 +42,7 @@ class CfgVehicles {
 
             class OwnerSide: Combo{
                 property     = QGVAR(ownerSide);
-                displayName  = "OefaultSide";
+                displayName  = "OwnerSide";
                 tooltip      = "WEST,EAST,None";
                 typeName     = "STRING";
                 defaultValue = """None""";
@@ -47,6 +65,13 @@ class CfgVehicles {
         class Attributes:AttributesBase{
             class Edit;
             class Combo;
+            class Name : Edit{
+                property     = QGVAR(name);
+                displayName  = "Name";
+                tooltip      = "Name of battle position";
+                typeName     = "STRING";    
+                defaultValue = """""";
+            };
             class Priority: Edit{
                 property     = QGVAR(priority);
                 displayName  = "Priority";

@@ -3,14 +3,15 @@ params["_treeCtl","_path","_unitList"];
 private _parentIndex = count _path;
 private _nextPath = _path + [0];
 {
-	_nextPath set [_parentIndex,_forEachIndex];
 	_x params["_unit"];
+	_nextPath set [_parentIndex,_forEachIndex];
+
 	private _name = _unit get "unitName";
 	LOG(_name);
 	_treeCtl tvAdd[_path,_name];
 	if("Higher" in (_unit get "#type"))then{
-		private _lowerUnits = _unit get "lowerUnits";
-		[_treeCtl,_nextPath,_lowerUnits] call FUNC(recursion);
+		private _subUnits = _unit get "subUnits";
+		[_treeCtl,_nextPath,_subUnits] call FUNC(recursion);
 	};
 	
 }forEach(_unitList);

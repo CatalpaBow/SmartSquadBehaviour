@@ -1,15 +1,15 @@
 GCLASS(HigherUnit) =  [
 	["#base", GCLASS(UnitBase)],
 	["#create",{
-		params["_unitName","_side","_location","_mission","_lowerUnits"];
-		_self set ["lowerUnits",_lowerUnits];
+		params["_unitName","_side","_deploymentArea","_mission","_subUnits"];
+		_self set ["subUnits",_subUnits];
 	}],
 	["#type","Higher"],
-	["lowerUnits",[]],
+	["subUnits",[]],
 	["AssignMission",{
 		params["_mission"];
 		_self set ["mission",_mission];
-		_lowerUnits = _self get "lowerUnits";
+		_subUnits = _self get "subUnits";
 		_subMissionList = _mission call ["CreateSubMission"];
 		{
 			LOG("OrderMissionHighToLow");
@@ -17,7 +17,7 @@ GCLASS(HigherUnit) =  [
 			private _missionNum = _forEachIndex % count _subMissionList; 
 			private _subMission = _subMissionList select _missionNum; 
 			_unit call ["AssignMission",[_subMission]];
-		}forEach(_lowerUnits);
+		}forEach(_subUnits);
 	}],
 	["InitialDeploy",{
 		params["_initialDeploymentArea"];
@@ -32,13 +32,13 @@ GCLASS(HigherUnit) =  [
 			_msg = format["(higherUnit InitialiDeplyoment)LoopInfo:febaCount:%1",_febaIndex];
 			LOG(_msg);
 			_unit call ["InitialDeploy",_feba];
-		}forEach(_self get "lowerUnits");
+		}forEach(_self get "subUnits");
 	}],
 	["Instantiate",{		
-		{_x call ["Instantiate"]}forEach(_self get "lowerUnits");
+		{_x call ["Instantiate"]}forEach(_self get "subUnits");
 	}],
 	["SubUnitCount",{
-		count (_self get "lowerUnits");
+		count (_self get "subUnits");
 	}]
 	
 ];

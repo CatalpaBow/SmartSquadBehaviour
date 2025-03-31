@@ -4,11 +4,11 @@ GCLASS(ArmyOrganization) = [
 		params ["_infSquadUnitNames"];
 		_self set ["infSquadUnitNames",_infSquadUnitNames];
 	}],
-
 	["GetSyncedGroupUnitClassNames",{
 		params["_module"];
 		private _syncObjs = synchronizedObjects _module;
 		private _manObjs = _syncObjs select {_x isKindOf "AllVehicles"};
+		LOG("horahora");
 		if(count _manObjs <= 0)exitWith{
 			LOG("(army organization)No synchronized infantry units found.");
 		};

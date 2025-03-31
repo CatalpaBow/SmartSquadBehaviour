@@ -39,7 +39,7 @@ class CfgVehicles {
     class GVAR(infantrySquadOrganization): EGVAR(modules,moduleBase) {
         category = "SmartSquadBehaviour";
         displayName = "InfantrySquadOrganization";
-        function = "";
+        function = QFUNC(infantrySquadOrganization);
     };
 
     class GVAR(armyCommander): EGVAR(modules,moduleBase) {

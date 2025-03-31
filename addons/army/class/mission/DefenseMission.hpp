@@ -23,7 +23,7 @@ GCLASS(DefenseMission)  = [
         if(isNull _group)exitWith{};
 
 		//Give waypoints to in game group to perform mission.
-		_areaPos = _self get "area" call ["GetPosition"];
+		_areaPos = _self get "area" get "position";
         _wp = _group addWaypoint[_areaPos,0];
         _wp setWaypointType "HOLD";
         _wp setWaypointBehaviour "AWARE";

@@ -1,5 +1,6 @@
 #include "\z\ssb\addons\army\class\army\Army.hpp"
 #include "\z\ssb\addons\army\class\army\ArmyCommander.hpp"
+#include "\z\ssb\addons\army\class\army\ArmyCreaterModule.hpp"
 #include "\z\ssb\addons\army\class\army\ArmyOrganization.hpp"
 #include "\z\ssb\addons\army\class\gui\DebugDisplay.hpp"
 #include "\z\ssb\addons\army\class\gui\DebugDisplayView.hpp"

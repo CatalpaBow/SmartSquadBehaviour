@@ -1,17 +1,16 @@
 GCLASS(BattlePosition) = [
     ["#base",GCLASS(IBattleArea)],
-    ["id",-1],
-    ["areaInfo",nil],
 	["priority",-1],
     ["ownerSide",""],
     ["connectedBPLows",[]],
     ["connectedBPSames",[]],
     ["connectedBPHighs",[]],
 	["#create", {	
-		params ["_areaInfo","_priority","_id","_ownerSide"];
-        _self set ["areaInfo",_areaInfo];
-		_self set ["priority",_priority];
+		params ["_id","_name","_position","_priority","_ownerSide"];
         _self set ["id",_id];
+        _self set ["name",_name];
+        _self set ["position",_position];
+		_self set ["priority",_priority];
         _self set ["ownerSide",_ownerSide];
 	}],
     ["FindFebaInside",{
@@ -25,7 +24,7 @@ GCLASS(BattlePosition) = [
         _self set ["connectedBPHighs",_highList];
     }],
     ["GetPosition",{
-        _self get "areaInfo" get "position";
+        _self get "position";
     }],
     ["GetLinkedBPs",{
         (_self get "connectedBPLows") + (_self get "connectedBPSames") + (_self get "connectedBPHighs");

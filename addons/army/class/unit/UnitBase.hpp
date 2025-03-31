@@ -2,7 +2,6 @@ GCLASS(UnitBase) = [
 	["#type", "BaseUnit"],
 	["unitName",""], //str
 	["side",""], //str
-	["location",nil], //BaseArea
 	["deploymentArea",nil],
 	["mission",nil], //Mission
 	["#create",{

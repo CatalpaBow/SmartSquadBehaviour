@@ -27,7 +27,7 @@ GCLASS(LowestUnit) = [
 	}],
 	["Instantiate",{		
 		//If unit is not deployed,nothing to do.
-		_deploymentArea = _self get "deploymentArea";
+		private _deploymentArea = _self get "deploymentArea";
 		if(isNil "_deploymentArea")exitWith{
 			LOG("Unit has not deployed and will not spawned.");
 			false;
@@ -49,7 +49,7 @@ GCLASS(LowestUnit) = [
 		LOG(_msg);
 	}],
 	["SpawnGroup",{
-		_deploymentArea = _self get "deploymentArea";
+		private _deploymentArea = _self get "deploymentArea";
 		_side = west;
 		if(_self get "side" == "west")then{
 			_side = west;	
@@ -58,7 +58,7 @@ GCLASS(LowestUnit) = [
 		};
 		_grp = createGroup _side;
 		_grpID = groupId _grp;
-		_spawnPos = _deploymentArea call ["GetPosition"];	
+		_spawnPos = _deploymentArea get "position";	
 		{ _grp createUnit[_x,_spawnPos,[],0,"NONE"]} forEach (_self get "unitClassNameList");
 		_msg = format["Group(%1) of unit(%2) spawned.",_grpID,_self get "unitName"];
 		LOG(_msg);

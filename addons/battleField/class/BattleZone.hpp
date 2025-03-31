@@ -1,17 +1,16 @@
 GCLASS(BattleZone) = [
     ["#base",GCLASS(IBattleArea)],
-    ["areaInfo",nil],
 	["battlePositions",[]],
 	["priority",0],
     ["ownerSide","none"],
 	["#create", {	
-		params ["_areaInfo","_battlePositions","_priority","_ownerSide"];
-        _self set ["areaInfo",_areaInfo];
-        //_keyValuePairArray = _battlePositions apply { [_x,_x get "id"]};
-        //_battlePositions = createHashMapFromArray [_keyValuePairArray];
+		params ["_id","_name","_position","_battlePositions","_priority","_ownerSide"];
+        _self set ["id",_id];
+        _self set ["name",_name];
+        _self set ["position",_position];
         _self set ["battlePositions",_battlePositions];
 		_self set ["priority",_priority];
-        _sefl set ["ownerSide",_ownerSide];
+        _self set ["ownerSide",_ownerSide];
 	}],
     ["FindFebaInside",{
         params["_side"];
@@ -91,7 +90,7 @@ GCLASS(BattleZone) = [
         _self call ["FindFebaSignlyLink",[_nextBP,_side]];
     }],
     ["GetPosition",{
-        _self get "areaInfo" get "position";
+        _self get "position";
     }],
     ["FindFebaRefactor",{
         params["_side"];

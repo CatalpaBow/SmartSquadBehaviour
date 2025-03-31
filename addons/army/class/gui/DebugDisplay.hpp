@@ -10,6 +10,7 @@ GCLASS(DebugDisplay) = [
 	}],
 	["Open",{
         private _armyList = _self get "armyList";
+        
         //CreateDisplay
         private _dis = findDisplay 313 createDisplay "SSBDisplayTest";
         private _unitTreeCtl = (_dis displayCtrl 1100) controlsGroupCtrl 1105;
@@ -17,16 +18,16 @@ GCLASS(DebugDisplay) = [
         _self set ["unitTreeCtl",_unitTreeCtl];
         _self set ["unitInfoCtl",_unitInfoCtl];
 
-        _unitTreeCtl tvAdd[[],"West"];
-        _unitTreeCtl tvAdd[[],"East"];
-        private _westIndex = _armyList findIf {_x get "side" == "west"};
-        private _eastIndex = _armyList findIf {_x get "side" == "east"};
-        if(_westIndex != -1)then{
-            [_unitTreeCtl,[0],_armyList select _westIndex get "lowerUnits"]call FUNC(recursion);
-        };
-        if(_eastIndex != -1)then{
-            [_unitTreeCtl,[1],_armyList select _eastIndex get "lowerUnits"]call FUNC(recursion);
-        };
+        //Set tree elements
+        {   
+            _x params["_army"];
+            private _side = _army get "side";
+            private _subUnits = _army get "unit" get "subUnits";
+            _unitTreeCtl tvAdd[[],_side];
+            [_unitTreeCtl,[_forEachIndex],_subUnits]call FUNC(recursion);
+        }forEach(_self get "armyList");
+
+        //Add an event handler to update the UnitInfo view when the tree selection changes
         _unitTreeCtl setVariable["treeSelChangedHdlr",_self];
         _unitTreeCtl ctrlAddEventHandler ["TreeSelChanged",{
 	        params ["_control", "_selectionPath"];
@@ -38,28 +39,26 @@ GCLASS(DebugDisplay) = [
 
         private _sideIndex = _selectionPath select 0;
         private _side =  _self get "armyList" select _sideIndex;
-        private _unitInstancePath = [];
-        private _unitParent = _side;
-        _selectionPath deleteAt 0;
-        _msg = format["selectionPath:%1",_selectionPath];
+        private _unitParent = _side get "unit";
+        private _isNil = isNil "_unitParent";
+        _msg = format["selectionPath:%1 ",_selectionPath];
         LOG(_msg);
+        private _unitInstancePath = [_unitParent];
+
         {
-            _msg = format["pathPart:%1,brothersCount:%2",_x,( count (_unitParent get "lowerUnits"))];
+            _msg = format["pathPart:%1,brothersCount:%2",_x,( count (_unitParent get "subUnits"))];
             LOG(_msg);
-            _unitInstancePath pushBack (_unitParent get "lowerUnits" select _x);
-            _unitParent = _unitParent get "lowerUnits" select _x;
+            private _pathUnit = _unitParent get "subUnits" select _x;
+            _unitInstancePath pushBack (_pathUnit);
+            _unitParent = _pathUnit;
         }forEach(_selectionPath);
-        private _count = count _unitInstancePath;
-        private _unitParent = _side;
-        if( (count _unitInstancePath) != 0)then{
-            _unitParent = _unitInstancePath select (count _unitInstancePath - 2);
-        };
-        private _unitNamePath = _unitInstancePath apply {_x get "unitName"};
-        LOG(_unitNamePath);
+
+        private _unit = _unitInstancePath select (count _unitInstancePath - 2);
+
 
         private _unitInfoCtl = _self get "unitInfoCtl";
         lnbClear _unitInfoCtl;
-        _unitInfoList = (_unitParent get "lowerUnits")apply{
+        _unitInfoList = (_unit get "subUnits") apply{
             private _name = _x get "unitName";
             private _mission = _x get "mission" get "type";
             private _deploymentArea = "kari";
@@ -67,6 +66,7 @@ GCLASS(DebugDisplay) = [
             [_name,_mission,_deploymentArea,_subUnitCount];
         };
         { _unitInfoCtl lnbAddRow  _x;}forEach(_unitInfoList);
+
 	}]
 
 ];

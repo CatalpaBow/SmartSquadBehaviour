@@ -12,7 +12,7 @@ GCLASS(ArmyCommander) = [
 		private _defensingManPower = 1 - _attackingManPower;
 
 		private _lotteryList = [];
-		for "_i" from 0 to (count _lowerUnits - 1) do{
+		for "_i" from 0 to (count _subUnits - 1) do{
 			_lotteryList pushBack _i;
 		};
 		for "_i" from 0 to _hoge do {

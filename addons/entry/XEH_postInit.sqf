@@ -1,2 +1,2 @@
 #include "script_component.hpp"
-[FUNC(start_up)] call CBA_fnc_execNextFrame;
+//[FUNC(start_up)] call CBA_fnc_execNextFrame;

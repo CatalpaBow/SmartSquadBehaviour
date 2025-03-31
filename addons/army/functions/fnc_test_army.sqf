@@ -3,13 +3,13 @@
 [] call ssb_army_fnc_declaraClass;
 [] call ssb_battleField_fnc_declaraClass;
 
-GVAR(debugArmyList) = call ssb_army_fnc_create_army_test;
-private _armyWestEast = GVAR(debugArmyList);
+private _armyCreater = createHashMapObject[GCLASS(ArmyCreaterModule)];
+private _armyWestEast = _armyCreater call ["Create"];
 {
 	_x params["_army"];
-	_army call ["InitialDeploy"];
-	_army call ["OrderInitialMission"];
-	_army call ["InstantiateAllUnits"];
+	//_army call ["InitialDeploy"];
+	//_army call ["OrderInitialMission"];
+	//_army call ["InstantiateAllUnits"];
 	/*
 	private _higherUnits = (_army get "lowerUnits");
 	private _lowerUnits = (_higherUnits select 0) get "lowerUnits";
@@ -23,4 +23,5 @@ private _armyWestEast = GVAR(debugArmyList);
 	private _lowerUnitsDeploymentArea = _lowerUnits apply{_x get "deploymentArea"};
 	*/
 }forEach(_armyWestEast);
-[_armyWestEast] call FUNC(debug_display);
+_armyWestEast;
+//[_armyWestEast] call FUNC(debug_display);\
